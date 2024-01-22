@@ -3,9 +3,9 @@ Bash script that automatically sets up PhpMyAdmin for NGINX
 
 ```
 git clone https://github.com/Sottoh/phpmyadmininstall.git
-cd Linux-Tools
-sudo chmod +x Linux-Tools
-sudo ./Linux-Tools
+cd phpmyadmininstall
+sudo chmod +x install.sh
+sudo ./install.sh
 ```
 
 # Supported distributions
