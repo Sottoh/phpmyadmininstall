@@ -1,6 +1,9 @@
 #!/bin/bash
 
 function isroot() {
+    echo ""
+
+    # Check if user is using script as sudo
     if [[ $EUID -ne 0 ]]; then
         echo "Please try runnig the script as sudo"
         exit 1
@@ -12,7 +15,7 @@ function isroot() {
 function checkos() {
     echo ""
 
-    # Check for /etc/debian_version file
+    # Checks for /etc/debian_version file
     if [ -f "/etc/debian_version" ]; then
         echo "This script can be used on your distribution."
     exit 0
@@ -26,25 +29,27 @@ function checkos() {
 
     echo "This script is intended for Debian-based distributions only."
     exit 1
-
-    echo ""
-
+    
     repositories
 }
 
 function repositories () {
+    # Updates repositories
     echo ""
 
     echo "Updating repositories"
 
     if sudo apt update &> /dev/null; then
         echo -e "   ➥\e[32mSuccessfully\e[0m updated the repositories!"
+    else
+        echo -e "   ➥\e[31mFailed\e[0m to update the repositories!"
     fi
 
     install
 }
 
 function install (){
+    # Installs programs
     echo ""
 
     echo "Installing needed programs"
@@ -52,19 +57,19 @@ function install (){
     if sudo apt install nginx -y &> /dev/null; then
         echo -e "   ➥\e[32msuccessfully\e[0m installed NGINX!"
     else
-        echo -e "   ➥\e[31mFailed\e[0m to install NGINX"
+        echo -e "   ➥\e[31mFailed\e[0m to install NGINX!"
     fi
 
     if sudo apt install mysql-server -y &> /dev/null; then
         echo -e "   ➥\e[32msuccessfully\e[0m installed MySQL!"
     else
-        echo -e "   ➥\e[31mFailed\e[0m to install MySQL"
+        echo -e "   ➥\e[31mFailed\e[0m to install MySQL!"
     fi
 
     if sudo apt install phpmyadmin -y > /dev/null 2>&1; then
         echo -e "   ➥\e[32msuccessfully\e[0m installed PhpMyAdmin!"
     else
-        echo -e "   ➥\e[31mFailed\e[0m to install PhpMyAdmin"
+        echo -e "   ➥\e[31mFailed\e[0m to install PhpMyAdmin!"
     fi
 }
 
